@@ -25,7 +25,8 @@ final class Settings {
         static let intervalMinutes = "intervalMinutes"
         static let skipWhilePlaying = "skipWhilePlaying"
         static let resetOnWake = "resetOnWake"
-        static let switchDelay = "switchDelay"
+        static let blinkHold = "blinkHold"
+        static let blinkTimeout = "blinkTimeout"
     }
 
     private let defaults: UserDefaults
@@ -37,7 +38,8 @@ final class Settings {
             Key.intervalMinutes: 30,
             Key.skipWhilePlaying: true,
             Key.resetOnWake: true,
-            Key.switchDelay: 0.5,
+            Key.blinkHold: 0.05,
+            Key.blinkTimeout: 1.0,
         ])
     }
 
@@ -62,8 +64,19 @@ final class Settings {
         set { defaults.set(newValue, forKey: Key.resetOnWake) }
     }
 
-    /// Seconds to stay on the intermediate device before switching back.
-    var switchDelay: TimeInterval {
-        min(5, max(0.05, defaults.double(forKey: Key.switchDelay)))
+    /// Extra seconds to stay on the intermediate device after the original
+    /// device has stopped I/O.
+    var blinkHold: TimeInterval {
+        min(2, max(0, defaults.double(forKey: Key.blinkHold)))
+    }
+
+    /// Maximum seconds to wait for the original device to stop I/O before
+    /// switching back anyway (e.g. when another app keeps it open directly).
+    var blinkTimeout: TimeInterval {
+        min(5, max(0.1, defaults.double(forKey: Key.blinkTimeout)))
+    }
+
+    var resetOptions: ResetOptions {
+        ResetOptions(skipWhilePlaying: skipWhilePlaying, hold: blinkHold, timeout: blinkTimeout)
     }
 }

@@ -18,9 +18,9 @@ SoundBlink automates that workaround.
 ## What it does
 
 - **Click the menu bar icon** to reset. The default output moves to the
-  built-in speakers (muted, so nothing leaks out) for about half a second and
-  then back. Core Audio restarts I/O on your device, which clears the
-  distortion.
+  built-in speakers (muted, so nothing leaks out) and comes back as soon as
+  your device has actually stopped. Core Audio restarts I/O on your device,
+  which clears the distortion. The whole gap is typically around 0.2 seconds.
 - Does nothing when the built-in output is already the default.
 - **Periodic reset** every 10, 30 or 60 minutes, which you can turn on or off.
   By default it is skipped while audio is playing.
@@ -76,8 +76,12 @@ Shortcuts ("Run Shell Script"), Raycast, Stream Deck and similar tools:
 ### Advanced settings
 
 ```sh
-# Seconds to stay on the intermediate device (default 0.5)
-defaults write io.github.takuhoito.soundblink switchDelay -float 0.8
+# Extra seconds to stay on the intermediate device after your device has
+# stopped (default 0.05). Raise this if a reset does not clear the noise.
+defaults write io.github.takuhoito.soundblink blinkHold -float 0.3
+# Maximum seconds to wait for your device to stop before switching back
+# anyway (default 1.0)
+defaults write io.github.takuhoito.soundblink blinkTimeout -float 2
 # Custom periodic interval in minutes
 defaults write io.github.takuhoito.soundblink intervalMinutes -int 15
 ```
@@ -90,7 +94,10 @@ Restart the app after changing these.
   default, may keep its own stream open, and the reset will not reach it. Set
   that app's speaker to the system default (for example in the audio settings
   of Zoom or Teams).
-- A reset interrupts audio for about half a second.
+- A reset interrupts audio briefly, typically for around 0.2 seconds. If
+  another app keeps your device open directly, the device cannot stop, and
+  SoundBlink switches back after `blinkTimeout`. The menu then reports
+  "device stayed busy".
 - "Skip While Audio Is Playing" relies on Core Audio's "device is running"
   flag. Some apps keep the device running even when they are silent (for
   example, browser tabs that hold an audio context, or video-call apps). While

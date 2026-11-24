@@ -20,6 +20,7 @@
 
 /* Outcomes */
 "Reset %@" = "%@ をリセットしました";
+"Reset %@ (device stayed busy)" = "%@ をリセット（デバイスは使用中のまま）";
 "Skipped (built-in output)" = "スキップ（内蔵出力を使用中）";
 "Skipped (audio playing)" = "スキップ（再生中）";
 "Failed: no output device" = "失敗: 出力デバイスがありません";

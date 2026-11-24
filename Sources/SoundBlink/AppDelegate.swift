@@ -161,7 +161,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func localizedDescription(of outcome: ResetOutcome) -> String {
         switch outcome {
-        case let .reset(device, _): return String(format: L("Reset %@"), device)
+        case let .reset(device, _, stoppedAfter):
+            return String(format: L(stoppedAfter == nil ? "Reset %@ (device stayed busy)" : "Reset %@"), device)
         case .skippedBuiltIn: return L("Skipped (built-in output)")
         case .skippedPlaying: return L("Skipped (audio playing)")
         case let .failed(failure):
@@ -236,11 +237,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         guard !isResetting else { return }
         isResetting = true
         setIcon(.busy)
-        Resetter.shared.reset(
-            trigger: trigger,
-            skipWhilePlaying: settings.skipWhilePlaying,
-            delay: settings.switchDelay
-        ) { [weak self] result in
+        Resetter.shared.reset(trigger: trigger, options: settings.resetOptions) { [weak self] result in
             guard let self else { return }
             self.isResetting = false
             self.lastResult = result

@@ -20,6 +20,7 @@
 
 /* Outcomes */
 "Reset %@" = "Reset %@";
+"Reset %@ (device stayed busy)" = "Reset %@ (device stayed busy)";
 "Skipped (built-in output)" = "Skipped (built-in output)";
 "Skipped (audio playing)" = "Skipped (audio playing)";
 "Failed: no output device" = "Failed: no output device";

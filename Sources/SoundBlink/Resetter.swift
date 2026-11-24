@@ -19,7 +19,9 @@ enum ResetFailure: Equatable {
 
 enum ResetOutcome: Equatable {
     /// The output was bounced through `via` and is back on `device`.
-    case reset(device: String, via: String)
+    /// `stoppedAfter` is how long the device took to stop I/O, or nil if it
+    /// kept running until the timeout (another app may hold it open directly).
+    case reset(device: String, via: String, stoppedAfter: TimeInterval?)
     /// The built-in output is already the default, so there is nothing to reset.
     case skippedBuiltIn
     /// Audio is playing and the trigger was automatic.
@@ -35,7 +37,11 @@ enum ResetOutcome: Equatable {
 extension ResetOutcome: CustomStringConvertible {
     var description: String {
         switch self {
-        case let .reset(device, via): return "Reset \(device) (via \(via))."
+        case let .reset(device, via, stoppedAfter):
+            if let stoppedAfter {
+                return "Reset \(device) via \(via) (output stopped after \(Int(stoppedAfter * 1000)) ms)."
+            }
+            return "Reset \(device) via \(via), but it kept running; another app may be using it directly."
         case .skippedBuiltIn: return "Skipped: the built-in output is already the default."
         case let .skippedPlaying(device): return "Skipped: audio is playing on \(device)."
         case let .failed(failure):
@@ -56,9 +62,22 @@ struct ResetResult {
     let date: Date
 }
 
+struct ResetOptions {
+    /// Skip scheduled and wake-triggered resets while the output is running.
+    var skipWhilePlaying: Bool
+    /// Extra time to stay on the intermediate device once the original device has stopped.
+    var hold: TimeInterval
+    /// Maximum time to wait for the original device to stop before switching back anyway.
+    var timeout: TimeInterval
+}
+
 /// Briefly moves the default output to another device and back, which makes
 /// Core Audio tear down and restart I/O on the original device. This clears the
 /// crackling/distortion some USB audio devices develop over time.
+///
+/// Instead of a fixed delay, it switches back as soon as the original device
+/// has actually stopped I/O (typically 20-30 ms after the switch), plus a short
+/// hold, so the audible gap stays as short as possible.
 final class Resetter {
     static let shared = Resetter()
 
@@ -66,21 +85,17 @@ final class Resetter {
     private let logger = Logger(subsystem: AppInfo.bundleIdentifier, category: "reset")
 
     /// Runs a reset on a background queue and calls `completion` on the main queue.
-    func reset(
-        trigger: ResetTrigger,
-        skipWhilePlaying: Bool,
-        delay: TimeInterval,
-        completion: @escaping (ResetResult) -> Void
-    ) {
+    func reset(trigger: ResetTrigger, options: ResetOptions, completion: @escaping (ResetResult) -> Void) {
         queue.async {
-            let result = self.performReset(trigger: trigger, skipWhilePlaying: skipWhilePlaying, delay: delay)
+            let result = self.performReset(trigger: trigger, options: options)
             DispatchQueue.main.async { completion(result) }
         }
     }
 
-    /// Runs a reset synchronously on the calling thread. Blocks for roughly `delay` seconds.
-    func performReset(trigger: ResetTrigger, skipWhilePlaying: Bool, delay: TimeInterval) -> ResetResult {
-        let outcome = bounce(trigger: trigger, skipWhilePlaying: skipWhilePlaying, delay: delay)
+    /// Runs a reset synchronously on the calling thread. Blocks for up to
+    /// `options.timeout + options.hold` plus a fraction of a second.
+    func performReset(trigger: ResetTrigger, options: ResetOptions) -> ResetResult {
+        let outcome = bounce(trigger: trigger, options: options)
         if outcome.isFailure {
             logger.error("[\(trigger.rawValue, privacy: .public)] \(outcome.description, privacy: .public)")
         } else {
@@ -89,14 +104,14 @@ final class Resetter {
         return ResetResult(trigger: trigger, outcome: outcome, date: Date())
     }
 
-    private func bounce(trigger: ResetTrigger, skipWhilePlaying: Bool, delay: TimeInterval) -> ResetOutcome {
+    private func bounce(trigger: ResetTrigger, options: ResetOptions) -> ResetOutcome {
         guard let output = AudioSystem.defaultDevice(.output) else {
             return .failed(.noOutputDevice)
         }
         if output.isBuiltIn {
             return .skippedBuiltIn
         }
-        if trigger != .manual, skipWhilePlaying, AudioSystem.isRunningSomewhere(output.id) {
+        if trigger != .manual, options.skipWhilePlaying, AudioSystem.isRunningSomewhere(output.id) {
             return .skippedPlaying(device: output.name)
         }
         guard let via = Self.intermediateDevice(excluding: output) else {
@@ -125,7 +140,8 @@ final class Resetter {
             AudioSystem.setDefaultDevice(.systemOutput, to: via.id)
         }
 
-        Thread.sleep(forTimeInterval: delay)
+        let stoppedAfter = waitUntilStopped(output.id, timeout: options.timeout)
+        Thread.sleep(forTimeInterval: options.hold)
 
         // Switch back by UID: the device ID can change if the device re-enumerated meanwhile.
         for attempt in 1...2 {
@@ -138,12 +154,24 @@ final class Resetter {
             }
             Thread.sleep(forTimeInterval: 0.15)
             if AudioSystem.defaultDeviceID(.output) == target.id {
-                return .reset(device: output.name, via: via.name)
+                return .reset(device: output.name, via: via.name, stoppedAfter: stoppedAfter)
             }
             logger.warning("Switch back to \(output.name, privacy: .public) did not stick (attempt \(attempt)).")
             Thread.sleep(forTimeInterval: 0.3)
         }
         return .failed(.couldNotSwitchBack(to: output.name))
+    }
+
+    /// Polls until no process is doing I/O on the device. Returns the elapsed
+    /// time, or nil if the device was still running when `timeout` passed.
+    private func waitUntilStopped(_ id: AudioDeviceID, timeout: TimeInterval) -> TimeInterval? {
+        let start = Date()
+        while true {
+            let elapsed = Date().timeIntervalSince(start)
+            if !AudioSystem.isRunningSomewhere(id) { return elapsed }
+            if elapsed >= timeout { return nil }
+            Thread.sleep(forTimeInterval: 0.005)
+        }
     }
 
     /// Picks the device to bounce through: the built-in output if there is one,

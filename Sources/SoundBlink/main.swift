@@ -41,11 +41,7 @@ enum CommandLineInterface {
     }
 
     static func reset() -> Int32 {
-        let result = Resetter.shared.performReset(
-            trigger: .manual,
-            skipWhilePlaying: false,
-            delay: Settings.shared.switchDelay
-        )
+        let result = Resetter.shared.performReset(trigger: .manual, options: Settings.shared.resetOptions)
         print(result.outcome.description)
         return result.outcome.isFailure ? 1 : 0
     }

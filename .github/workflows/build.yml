@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Build app
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            export VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          export BUILD_NUMBER="$GITHUB_RUN_NUMBER"
+          scripts/build-app.sh
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: SoundBlink
+          path: build/*.zip
+          if-no-files-found: error
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: SoundBlink
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "$GITHUB_REF_NAME" ./*.zip
+          --repo "$GITHUB_REPOSITORY"
+          --title "$GITHUB_REF_NAME"
+          --generate-notes

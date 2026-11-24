@@ -1,0 +1,32 @@
+/* Menu bar tooltip */
+"Click to reset the audio output. Right-click for options." = "クリックで音声出力をリセット。右クリックで設定。";
+
+/* Menu items */
+"Reset Now" = "今すぐリセット";
+"Periodic Reset" = "定期リセット";
+"Interval" = "間隔";
+"Every %d min" = "%d分ごと";
+"Skip While Audio Is Playing" = "再生中はスキップ";
+"Reset After Waking from Sleep" = "スリープ復帰時にリセット";
+"Launch at Login" = "ログイン時に起動";
+"Output: %@" = "出力先: %@";
+"Output: none" = "出力先: なし";
+"Open GitHub Page…" = "GitHub ページを開く…";
+"Quit %@" = "%@ を終了";
+
+/* Last result line: %1$@ = time, %2$@ = outcome */
+"Not run yet" = "まだ実行していません";
+"Last run %@: %@" = "最終実行 %1$@: %2$@";
+
+/* Outcomes */
+"Reset %@" = "%@ をリセットしました";
+"Skipped (built-in output)" = "スキップ（内蔵出力を使用中）";
+"Skipped (audio playing)" = "スキップ（再生中）";
+"Failed: no output device" = "失敗: 出力デバイスがありません";
+"Failed: no other output device" = "失敗: 切り替え先の出力デバイスがありません";
+"Failed: could not switch to %@" = "失敗: %@ に切り替えられませんでした";
+"Failed: %@ disappeared" = "失敗: 切り替え中に %@ が見つからなくなりました";
+"Failed: could not switch back to %@" = "失敗: %@ に戻せませんでした";
+
+/* Errors */
+"Could not change Launch at Login" = "「ログイン時に起動」を変更できませんでした";

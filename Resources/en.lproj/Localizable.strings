@@ -1,0 +1,32 @@
+/* Menu bar tooltip */
+"Click to reset the audio output. Right-click for options." = "Click to reset the audio output. Right-click for options.";
+
+/* Menu items */
+"Reset Now" = "Reset Now";
+"Periodic Reset" = "Periodic Reset";
+"Interval" = "Interval";
+"Every %d min" = "Every %d min";
+"Skip While Audio Is Playing" = "Skip While Audio Is Playing";
+"Reset After Waking from Sleep" = "Reset After Waking from Sleep";
+"Launch at Login" = "Launch at Login";
+"Output: %@" = "Output: %@";
+"Output: none" = "Output: none";
+"Open GitHub Page…" = "Open GitHub Page…";
+"Quit %@" = "Quit %@";
+
+/* Last result line: %1$@ = time, %2$@ = outcome */
+"Not run yet" = "Not run yet";
+"Last run %@: %@" = "Last run %1$@: %2$@";
+
+/* Outcomes */
+"Reset %@" = "Reset %@";
+"Skipped (built-in output)" = "Skipped (built-in output)";
+"Skipped (audio playing)" = "Skipped (audio playing)";
+"Failed: no output device" = "Failed: no output device";
+"Failed: no other output device" = "Failed: no other output device";
+"Failed: could not switch to %@" = "Failed: could not switch to %@";
+"Failed: %@ disappeared" = "Failed: %@ disappeared";
+"Failed: could not switch back to %@" = "Failed: could not switch back to %@";
+
+/* Errors */
+"Could not change Launch at Login" = "Could not change Launch at Login";

@@ -1,3 +1,5 @@
+<img src="Resources/AppIcon.svg" width="128" height="128" alt="SoundBlink icon">
+
 # SoundBlink
 
 [日本語](README.ja.md)
@@ -130,6 +132,11 @@ swift run SoundBlink --list        # quick CLI run without building the app bund
 
 The app's name, bundle ID and version are set in `scripts/config.sh`.
 
+The icons are drawn as SVG in `Resources/AppIcon.svg` and
+`Resources/StatusIcon.svg`. After editing them, run `scripts/make-icons.sh`
+to regenerate `AppIcon.icns` and `StatusIcon.pdf` (this needs `rsvg-convert`
+from `brew install librsvg`).
+
 ## Contributing
 
 Issues and pull requests are welcome. When you report a problem, please
@@ -141,4 +148,5 @@ include:
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). The app icon and the menu bar icon are original artwork made
+for this project, and they are covered by the same license.

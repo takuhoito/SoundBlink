@@ -64,8 +64,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         statusItem.menu = nil
     }
 
+    /// The app's own menu bar glyph (Resources/StatusIcon.pdf); nil when running unbundled.
+    private lazy var statusIcon: NSImage? = {
+        guard let image = Bundle.main.image(forResource: "StatusIcon") else { return nil }
+        image.size = NSSize(width: 18, height: 18)
+        image.isTemplate = true
+        image.accessibilityDescription = AppInfo.name
+        return image
+    }()
+
     private func setIcon(_ icon: Icon) {
         iconRestore?.cancel()
+        if icon == .idle, let statusIcon {
+            statusItem.button?.image = statusIcon
+            return
+        }
         let image = NSImage(systemSymbolName: icon.symbolName, accessibilityDescription: AppInfo.name)
         image?.isTemplate = true
         statusItem.button?.image = image

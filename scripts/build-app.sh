@@ -36,6 +36,8 @@ sed -e "s|@APP_NAME@|$APP_NAME|g" \
     "$ROOT/Resources/Info.plist.in" > "$app/Contents/Info.plist"
 plutil -lint -s "$app/Contents/Info.plist"
 
+cp "$ROOT/Resources/AppIcon.icns" "$ROOT/Resources/StatusIcon.pdf" "$app/Contents/Resources/"
+
 for lproj in "$ROOT"/Resources/*.lproj; do
   for strings in "$lproj"/*.strings; do
     plutil -lint -s "$strings"

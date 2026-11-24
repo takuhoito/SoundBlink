@@ -129,6 +129,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         wake.state = settings.resetOnWake ? .on : .off
         menu.addItem(wake)
 
+        let devices = NSMenuItem(title: L("Auto-Reset Devices"), action: nil, keyEquivalent: "")
+        devices.submenu = buildDevicesMenu()
+        menu.addItem(devices)
+
         menu.addItem(.separator())
 
         let login = actionItem(L("Launch at Login"), #selector(toggleLaunchAtLogin))
@@ -141,8 +145,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        let outputName = AudioSystem.defaultDevice(.output)?.name
-        menu.addItem(infoItem(outputName.map { String(format: L("Output: %@"), $0) } ?? L("Output: none")))
+        menu.addItem(infoItem(currentOutputText()))
         menu.addItem(infoItem(lastResultText()))
 
         menu.addItem(.separator())
@@ -152,6 +155,53 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         quit.keyEquivalent = "q"
         menu.addItem(quit)
         return menu
+    }
+
+    /// One checkable item per external output device. Every device is checked
+    /// (included) by default; excluded devices that are not connected right now
+    /// are still listed so they can be included again.
+    private func buildDevicesMenu() -> NSMenu {
+        let menu = NSMenu()
+        menu.autoenablesItems = false
+
+        let connected = AudioSystem.outputDevices().filter { !$0.isBuiltIn }
+        let connectedUIDs = Set(connected.map(\.uid))
+        let disconnectedExcluded = settings.excludedDevices
+            .filter { !connectedUIDs.contains($0.key) }
+            .sorted { $0.value.localizedStandardCompare($1.value) == .orderedAscending }
+
+        if connected.isEmpty, disconnectedExcluded.isEmpty {
+            menu.addItem(infoItem(L("No external output devices")))
+            return menu
+        }
+
+        for device in connected {
+            menu.addItem(deviceItem(title: device.name, uid: device.uid, name: device.name))
+        }
+        if !disconnectedExcluded.isEmpty {
+            if !connected.isEmpty { menu.addItem(.separator()) }
+            for (uid, name) in disconnectedExcluded {
+                menu.addItem(deviceItem(title: String(format: L("%@ (not connected)"), name), uid: uid, name: name))
+            }
+        }
+        menu.addItem(.separator())
+        menu.addItem(infoItem(L("Unchecked devices are only reset by clicking.")))
+        return menu
+    }
+
+    private func deviceItem(title: String, uid: String, name: String) -> NSMenuItem {
+        let item = actionItem(title, #selector(toggleDeviceAutoReset(_:)))
+        item.representedObject = [uid, name]
+        item.state = settings.isAutoResetEnabled(for: uid) ? .on : .off
+        return item
+    }
+
+    private func currentOutputText() -> String {
+        guard let output = AudioSystem.defaultDevice(.output) else { return L("Output: none") }
+        if !output.isBuiltIn, !settings.isAutoResetEnabled(for: output.uid) {
+            return String(format: L("Output: %@ (auto-reset off)"), output.name)
+        }
+        return String(format: L("Output: %@"), output.name)
     }
 
     private func actionItem(_ title: String, _ action: Selector) -> NSMenuItem {
@@ -178,6 +228,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             return String(format: L(stoppedAfter == nil ? "Reset %@ (device stayed busy)" : "Reset %@"), device)
         case .skippedBuiltIn: return L("Skipped (built-in output)")
         case .skippedPlaying: return L("Skipped (audio playing)")
+        case .skippedExcluded: return L("Skipped (auto-reset off for this device)")
         case let .failed(failure):
             switch failure {
             case .noOutputDevice: return L("Failed: no output device")
@@ -211,6 +262,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func toggleResetOnWake() {
         settings.resetOnWake.toggle()
+    }
+
+    @objc private func toggleDeviceAutoReset(_ sender: NSMenuItem) {
+        guard let payload = sender.representedObject as? [String], payload.count == 2 else { return }
+        let (uid, name) = (payload[0], payload[1])
+        settings.setAutoReset(!settings.isAutoResetEnabled(for: uid), uid: uid, name: name)
     }
 
     @objc private func toggleLaunchAtLogin() {

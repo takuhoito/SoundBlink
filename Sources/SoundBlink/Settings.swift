@@ -27,6 +27,7 @@ final class Settings {
         static let resetOnWake = "resetOnWake"
         static let blinkHold = "blinkHold"
         static let blinkTimeout = "blinkTimeout"
+        static let excludedDevices = "excludedDevices"
     }
 
     private let defaults: UserDefaults
@@ -76,7 +77,30 @@ final class Settings {
         min(5, max(0.1, defaults.double(forKey: Key.blinkTimeout)))
     }
 
+    /// Devices excluded from automatic (periodic and wake) resets, as UID -> name.
+    /// Every device is included by default. The name is kept so that excluded
+    /// devices can still be listed while they are disconnected.
+    var excludedDevices: [String: String] {
+        get { defaults.dictionary(forKey: Key.excludedDevices) as? [String: String] ?? [:] }
+        set { defaults.set(newValue, forKey: Key.excludedDevices) }
+    }
+
+    func isAutoResetEnabled(for uid: String) -> Bool {
+        excludedDevices[uid] == nil
+    }
+
+    func setAutoReset(_ enabled: Bool, uid: String, name: String) {
+        var excluded = excludedDevices
+        excluded[uid] = enabled ? nil : name
+        excludedDevices = excluded
+    }
+
     var resetOptions: ResetOptions {
-        ResetOptions(skipWhilePlaying: skipWhilePlaying, hold: blinkHold, timeout: blinkTimeout)
+        ResetOptions(
+            skipWhilePlaying: skipWhilePlaying,
+            excludedDeviceUIDs: Set(excludedDevices.keys),
+            hold: blinkHold,
+            timeout: blinkTimeout
+        )
     }
 }

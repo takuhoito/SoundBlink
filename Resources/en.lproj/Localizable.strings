@@ -9,7 +9,12 @@
 "Skip While Audio Is Playing" = "Skip While Audio Is Playing";
 "Reset After Waking from Sleep" = "Reset After Waking from Sleep";
 "Launch at Login" = "Launch at Login";
+"Auto-Reset Devices" = "Auto-Reset Devices";
+"%@ (not connected)" = "%@ (not connected)";
+"No external output devices" = "No external output devices";
+"Unchecked devices are only reset by clicking." = "Unchecked devices are only reset by clicking.";
 "Output: %@" = "Output: %@";
+"Output: %@ (auto-reset off)" = "Output: %@ (auto-reset off)";
 "Output: none" = "Output: none";
 "Open GitHub Page…" = "Open GitHub Page…";
 "Quit %@" = "Quit %@";
@@ -23,6 +28,7 @@
 "Reset %@ (device stayed busy)" = "Reset %@ (device stayed busy)";
 "Skipped (built-in output)" = "Skipped (built-in output)";
 "Skipped (audio playing)" = "Skipped (audio playing)";
+"Skipped (auto-reset off for this device)" = "Skipped (auto-reset off for this device)";
 "Failed: no output device" = "Failed: no output device";
 "Failed: no other output device" = "Failed: no other output device";
 "Failed: could not switch to %@" = "Failed: could not switch to %@";

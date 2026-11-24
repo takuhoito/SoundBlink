@@ -31,11 +31,14 @@ enum CommandLineInterface {
             let marker = device.id == output ? "*" : " "
             let mute = AudioSystem.outputMute(device.id).map { $0 ? "on" : "off" } ?? "n/a"
             let running = AudioSystem.isRunningSomewhere(device.id) ? "yes" : "no"
+            let autoReset = device.isBuiltIn
+                ? "n/a"
+                : (Settings.shared.isAutoResetEnabled(for: device.uid) ? "on" : "off")
             print("""
               \(marker) \(device.name)
                   uid: \(device.uid)
                   transport: \(device.transportName), sample rate: \(Int(device.nominalSampleRate)) Hz, \
-            channels: \(device.outputChannels), mute: \(mute), running: \(running)
+            channels: \(device.outputChannels), mute: \(mute), running: \(running), auto-reset: \(autoReset)
             """)
         }
     }

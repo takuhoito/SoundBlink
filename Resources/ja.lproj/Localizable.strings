@@ -9,7 +9,12 @@
 "Skip While Audio Is Playing" = "再生中はスキップ";
 "Reset After Waking from Sleep" = "スリープ復帰時にリセット";
 "Launch at Login" = "ログイン時に起動";
+"Auto-Reset Devices" = "自動リセットの対象";
+"%@ (not connected)" = "%@（未接続）";
+"No external output devices" = "外部の出力デバイスがありません";
+"Unchecked devices are only reset by clicking." = "チェックを外したデバイスはクリック時のみリセット";
 "Output: %@" = "出力先: %@";
+"Output: %@ (auto-reset off)" = "出力先: %@（自動リセット対象外）";
 "Output: none" = "出力先: なし";
 "Open GitHub Page…" = "GitHub ページを開く…";
 "Quit %@" = "%@ を終了";
@@ -23,6 +28,7 @@
 "Reset %@ (device stayed busy)" = "%@ をリセット（デバイスは使用中のまま）";
 "Skipped (built-in output)" = "スキップ（内蔵出力を使用中）";
 "Skipped (audio playing)" = "スキップ（再生中）";
+"Skipped (auto-reset off for this device)" = "スキップ（自動リセット対象外のデバイス）";
 "Failed: no output device" = "失敗: 出力デバイスがありません";
 "Failed: no other output device" = "失敗: 切り替え先の出力デバイスがありません";
 "Failed: could not switch to %@" = "失敗: %@ に切り替えられませんでした";

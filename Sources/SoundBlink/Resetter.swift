@@ -26,6 +26,8 @@ enum ResetOutcome: Equatable {
     case skippedBuiltIn
     /// Audio is playing and the trigger was automatic.
     case skippedPlaying(device: String)
+    /// The device is excluded from automatic resets and the trigger was automatic.
+    case skippedExcluded(device: String)
     case failed(ResetFailure)
 
     var isFailure: Bool {
@@ -44,6 +46,7 @@ extension ResetOutcome: CustomStringConvertible {
             return "Reset \(device) via \(via), but it kept running; another app may be using it directly."
         case .skippedBuiltIn: return "Skipped: the built-in output is already the default."
         case let .skippedPlaying(device): return "Skipped: audio is playing on \(device)."
+        case let .skippedExcluded(device): return "Skipped: automatic reset is turned off for \(device)."
         case let .failed(failure):
             switch failure {
             case .noOutputDevice: return "Failed: there is no default output device."
@@ -65,6 +68,9 @@ struct ResetResult {
 struct ResetOptions {
     /// Skip scheduled and wake-triggered resets while the output is running.
     var skipWhilePlaying: Bool
+    /// Devices that scheduled and wake-triggered resets leave alone.
+    /// Manual resets always run.
+    var excludedDeviceUIDs: Set<String>
     /// Extra time to stay on the intermediate device once the original device has stopped.
     var hold: TimeInterval
     /// Maximum time to wait for the original device to stop before switching back anyway.
@@ -110,6 +116,9 @@ final class Resetter {
         }
         if output.isBuiltIn {
             return .skippedBuiltIn
+        }
+        if trigger != .manual, options.excludedDeviceUIDs.contains(output.uid) {
+            return .skippedExcluded(device: output.name)
         }
         if trigger != .manual, options.skipWhilePlaying, AudioSystem.isRunningSomewhere(output.id) {
             return .skippedPlaying(device: output.name)

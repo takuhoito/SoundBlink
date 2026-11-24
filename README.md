@@ -27,6 +27,9 @@ SoundBlink automates that workaround.
 - **Periodic reset** every 10, 30 or 60 minutes, which you can turn on or off.
   By default it is skipped while audio is playing.
 - **Reset after waking from sleep** (optional).
+- **Choose which devices are reset automatically.** All external output
+  devices are included by default. Uncheck a device to keep periodic and
+  wake resets away from it; clicking the icon still resets it.
 - **Launch at login.**
 - English and Japanese UI.
 
@@ -62,6 +65,8 @@ The menu contains:
 - Periodic Reset, with a choice of interval
 - Skip While Audio Is Playing
 - Reset After Waking from Sleep
+- Auto-Reset Devices: uncheck the devices that periodic and wake resets should
+  leave alone. Devices you unchecked stay listed while they are disconnected.
 - Launch at Login
 - The current output device and the result of the last reset
 
@@ -88,7 +93,8 @@ defaults write io.github.takuhoito.soundblink blinkTimeout -float 2
 defaults write io.github.takuhoito.soundblink intervalMinutes -int 15
 ```
 
-Restart the app after changing these.
+Restart the app after changing these. The `--list` output shows whether
+automatic reset is on for each device.
 
 ## Limitations
 

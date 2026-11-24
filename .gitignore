@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Swift Package Manager
+/.build/
+/.swiftpm/
+/Packages/
+
+# Build output (scripts/build-app.sh)
+/build/
+
+# Xcode
+xcuserdata/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local tool settings
+.claude/settings.local.json
+.env
+.env.*
+
+# Signing material — never commit
+*.p12
+*.cer
+*.certSigningRequest
+*.mobileprovision
+*.provisionprofile

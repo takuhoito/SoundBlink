@@ -24,8 +24,12 @@ DerivedData/
 *.swp
 *~
 
-# Local tool settings
-.claude/settings.local.json
+# Local AI assistant settings and notes
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+
+# Local environment
 .env
 .env.*
 

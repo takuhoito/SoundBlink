@@ -1,0 +1,137 @@
+# SoundBlink
+
+[日本語](README.ja.md)
+
+A tiny macOS menu bar app that clears crackling USB audio by "blinking" the
+output to another device and straight back.
+
+## The problem
+
+On some Macs, USB audio devices (speakers, DACs, headsets, often connected
+through a monitor or dock hub) start to sound crackly or distorted after a
+while. Reports have become common since macOS Tahoe, especially on Apple
+silicon. Switching the output to the built-in speakers and back makes the noise
+go away until the next time.
+
+SoundBlink automates that workaround.
+
+## What it does
+
+- **Click the menu bar icon** to reset. The default output moves to the
+  built-in speakers (muted, so nothing leaks out) for about half a second and
+  then back. Core Audio restarts I/O on your device, which clears the
+  distortion.
+- Does nothing when the built-in output is already the default.
+- **Periodic reset** every 10, 30 or 60 minutes, which you can turn on or off.
+  By default it is skipped while audio is playing.
+- **Reset after waking from sleep** (optional).
+- **Launch at login.**
+- English and Japanese UI.
+
+If the Mac has no built-in output, SoundBlink switches through another output
+device instead, preferring a physical device that it can mute.
+
+## Install
+
+1. Download `SoundBlink-x.y.z.zip` from
+   [Releases](https://github.com/takuhoito/SoundBlink/releases), unzip it and
+   move `SoundBlink.app` to `/Applications`.
+2. The app is not notarized yet, so Gatekeeper blocks the first launch. Open it
+   once, then go to **System Settings → Privacy & Security** and click
+   **Open Anyway**. Alternatively, run:
+   ```sh
+   xattr -dr com.apple.quarantine /Applications/SoundBlink.app
+   ```
+3. Right-click the menu bar icon and turn on **Launch at Login**.
+
+SoundBlink requires macOS 13 Ventura or later. It is a universal app (Apple
+silicon and Intel).
+
+## Usage
+
+| Action                      | Result         |
+| --------------------------- | -------------- |
+| Click                       | Reset now      |
+| Right-click / Control-click | Open the menu  |
+
+The menu contains:
+
+- Reset Now
+- Periodic Reset, with a choice of interval
+- Skip While Audio Is Playing
+- Reset After Waking from Sleep
+- Launch at Login
+- The current output device and the result of the last reset
+
+### Command line
+
+The app binary also works as a command-line tool. You can call it from
+Shortcuts ("Run Shell Script"), Raycast, Stream Deck and similar tools:
+
+```sh
+/Applications/SoundBlink.app/Contents/MacOS/SoundBlink --reset   # reset once
+/Applications/SoundBlink.app/Contents/MacOS/SoundBlink --list    # list output devices
+```
+
+### Advanced settings
+
+```sh
+# Seconds to stay on the intermediate device (default 0.5)
+defaults write io.github.takuhoito.soundblink switchDelay -float 0.8
+# Custom periodic interval in minutes
+defaults write io.github.takuhoito.soundblink intervalMinutes -int 15
+```
+
+Restart the app after changing these.
+
+## Limitations
+
+- An app that is set to a specific output device, rather than the system
+  default, may keep its own stream open, and the reset will not reach it. Set
+  that app's speaker to the system default (for example in the audio settings
+  of Zoom or Teams).
+- A reset interrupts audio for about half a second.
+- "Skip While Audio Is Playing" relies on Core Audio's "device is running"
+  flag. Some apps keep the device running even when they are silent (for
+  example, browser tabs that hold an audio context, or video-call apps). While
+  they do, periodic resets keep getting skipped. Turn the option off if that
+  happens.
+- SoundBlink is a workaround. The root cause is in macOS or in the USB path.
+
+## Finding the root cause
+
+- Connect the audio device directly to the Mac instead of through a monitor or
+  dock hub, and see whether the problem comes back.
+- Avoid putting two USB audio devices, such as a USB microphone and USB
+  speakers, on the same USB 2.0 hub. On many inexpensive hubs, all full-speed
+  devices share a single transaction translator.
+- `system_profiler SPUSBHostDataType` shows how your USB devices are connected.
+- SoundBlink's log:
+  `/usr/bin/log stream --predicate 'subsystem == "io.github.takuhoito.soundblink"'`
+
+## Building from source
+
+The Xcode command line tools (Swift 5.9 or later) are required.
+
+```sh
+git clone https://github.com/takuhoito/SoundBlink.git
+cd SoundBlink
+scripts/build-app.sh               # build/SoundBlink.app and build/SoundBlink-<version>.zip
+ARCHS=arm64 scripts/build-app.sh   # faster, Apple silicon only
+swift run SoundBlink --list        # quick CLI run without building the app bundle
+```
+
+The app's name, bundle ID and version are set in `scripts/config.sh`.
+
+## Contributing
+
+Issues and pull requests are welcome. When you report a problem, please
+include:
+
+- the output of `SoundBlink --list`
+- your Mac model and macOS version
+- how the audio device is connected (directly, through a hub, through a monitor)
+
+## License
+
+[MIT](LICENSE)

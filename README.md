@@ -157,6 +157,12 @@ include:
 - your Mac model and macOS version
 - how the audio device is connected (directly, through a hub, through a monitor)
 
+## Support
+
+SoundBlink is free. If it helps you and you would like to say thanks, you
+can [sponsor me on GitHub](https://github.com/sponsors/takuhoito). It is
+entirely optional.
+
 ## License
 
 [MIT](LICENSE). The app icon, the menu bar icon and the social preview image

@@ -57,8 +57,12 @@ jobs:
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >
-          gh release create "$GITHUB_REF_NAME" ./*.zip
-          --repo "$GITHUB_REPOSITORY"
-          --title "$GITHUB_REF_NAME"
-          --generate-notes
+        run: |
+          # A copy without the version in its name gives the website a link
+          # that always downloads the latest release:
+          # https://github.com/<repo>/releases/latest/download/SoundBlink.zip
+          cp SoundBlink-*.zip SoundBlink.zip
+          gh release create "$GITHUB_REF_NAME" ./*.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "SoundBlink ${GITHUB_REF_NAME#v}" \
+            --generate-notes

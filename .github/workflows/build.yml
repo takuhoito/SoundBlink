@@ -4,7 +4,17 @@ on:
   push:
     branches: [main]
     tags: ["v*"]
+    # Skip changes that cannot affect the app. Path filters are not evaluated
+    # for tag pushes, so releases always build.
+    paths-ignore:
+      - "site/**"
+      - "**/*.md"
+      - ".github/workflows/pages.yml"
   pull_request:
+    paths-ignore:
+      - "site/**"
+      - "**/*.md"
+      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:

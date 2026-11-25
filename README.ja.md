@@ -110,11 +110,7 @@ Web サイトは `site/` にある素の HTML です。`site/index.html` をブ�
 
 ## コントリビュート
 
-Issue や Pull Request を歓迎します。不具合を報告するときは、次の情報を添えてください。
-
-- `SoundBlink --list` の出力
-- Mac の機種と macOS のバージョン
-- オーディオ機器のつなぎ方（本体に直結 / ハブ経由 / モニター経由）
+Issue や Pull Request を歓迎します。日本語でも英語でもかまいません。不具合の報告のしかたや開発の進め方は、[CONTRIBUTING.md](CONTRIBUTING.md)（英語）にまとめています。参加するときは[行動規範](CODE_OF_CONDUCT.md)に従ってください。セキュリティの問題は、公開の Issue ではなく、[SECURITY.md](SECURITY.md) の手順で非公開で報告してください。
 
 ## 支援
 

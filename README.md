@@ -150,12 +150,10 @@ preview it. Changes pushed to `main` are published to GitHub Pages by
 
 ## Contributing
 
-Issues and pull requests are welcome. When you report a problem, please
-include:
-
-- the output of `SoundBlink --list`
-- your Mac model and macOS version
-- how the audio device is connected (directly, through a hub, through a monitor)
+Issues and pull requests are welcome, in English or Japanese. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for how to report a bug and how to work on
+the code. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md), and report
+security problems privately as described in [SECURITY.md](SECURITY.md).
 
 ## Support
 

@@ -1,0 +1,29 @@
+name: Feature request
+description: Suggest an idea for SoundBlink.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        SoundBlink tries to stay small and quiet, so not every idea will fit, but every suggestion is read.
+        English or Japanese is fine (日本語でも大丈夫です).
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the situation where SoundBlink falls short today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered

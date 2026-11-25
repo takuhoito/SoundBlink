@@ -1,0 +1,83 @@
+name: Bug report
+description: Something doesn't work as expected, or a reset doesn't clear the noise.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this! English or Japanese is fine (日本語でも大丈夫です).
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reset-helps
+    attributes:
+      label: Does clicking the menu bar icon clear the noise?
+      options:
+        - "Yes"
+        - "Partly, or only for a short time"
+        - "No"
+        - "Not about noise"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: SoundBlink version
+      description: Shown near the bottom of the menu (right-click the icon).
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "macOS 26.1"
+    validations:
+      required: true
+
+  - type: input
+    id: mac
+    attributes:
+      label: Mac model
+      placeholder: "MacBook Pro (14-inch, 2021), M1 Pro"
+
+  - type: dropdown
+    id: connection
+    attributes:
+      label: How is the audio device connected?
+      options:
+        - "Directly to the Mac"
+        - "Through a USB hub"
+        - "Through a monitor or dock"
+        - "Other (please describe above)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: device-list
+    attributes:
+      label: Output of `SoundBlink --list`
+      description: |
+        Run `/Applications/SoundBlink.app/Contents/MacOS/SoundBlink --list` in Terminal and paste the output.
+        It lists your audio devices' names and IDs. Remove anything you'd rather not share.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional)
+      description: |
+        Right after the problem happens, run this and paste the output:
+        `/usr/bin/log show --last 30m --predicate 'subsystem == "io.github.takuhoito.soundblink"'`
+      render: text

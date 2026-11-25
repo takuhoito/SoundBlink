@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoundBlink – Fix crackling USB audio on your Mac</title>
+  <meta name="description" content="SoundBlink is a free, open-source macOS menu bar app that fixes crackling, popping or distorted USB speakers, DACs and headsets by briefly switching the output to the built-in speakers and back.">
+  <link rel="canonical" href="https://takuhoito.github.io/SoundBlink/">
+  <link rel="alternate" hreflang="en" href="https://takuhoito.github.io/SoundBlink/">
+  <link rel="alternate" hreflang="ja" href="https://takuhoito.github.io/SoundBlink/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://takuhoito.github.io/SoundBlink/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SoundBlink">
+  <meta property="og:title" content="SoundBlink – Fix crackling USB audio on your Mac">
+  <meta property="og:description" content="A free menu bar app that clears crackling USB audio by blinking the output to the built-in speakers and back.">
+  <meta property="og:url" content="https://takuhoito.github.io/SoundBlink/">
+  <meta property="og:image" content="https://takuhoito.github.io/SoundBlink/assets/og.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="SoundBlink: fix crackling USB audio on your Mac">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SoundBlink",
+    "description": "A macOS menu bar app that fixes crackling USB audio by briefly switching the output to the built-in speakers and back.",
+    "url": "https://takuhoito.github.io/SoundBlink/",
+    "downloadUrl": "https://github.com/takuhoito/SoundBlink/releases/latest",
+    "image": "https://takuhoito.github.io/SoundBlink/assets/og.png",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS 13 or later",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./"><img src="assets/icon.svg" alt="" width="32" height="32">SoundBlink</a>
+      <nav>
+        <a href="ja/" hreflang="ja" lang="ja">日本語</a>
+        <a href="https://github.com/takuhoito/SoundBlink">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <img class="hero-icon" src="assets/icon.svg" alt="" width="120" height="120">
+          <h1>Fix crackling USB audio on your Mac</h1>
+          <p class="lead">A free menu bar app for when your USB speakers or DAC start to crackle. One click switches the output to the built-in speakers and straight back, the same trick that fixes it by hand, in about 0.2&nbsp;seconds.</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip">Download for Mac</a>
+            <a class="button secondary" href="https://github.com/takuhoito/SoundBlink">View on GitHub</a>
+          </div>
+          <p class="meta">Free and open source (MIT) · macOS 13 Ventura or later · Apple silicon and Intel</p>
+        </div>
+
+        <div class="mock" role="img" aria-label="The SoundBlink menu, opened from its menu bar icon">
+          <div class="mock-bar">
+            <span class="other"></span>
+            <span class="other"></span>
+            <span class="status">
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                <g stroke-width="8" stroke-linecap="round">
+                  <path d="M12.41,36.32 A40,40 0 0 1 87.59,36.32"/>
+                  <path d="M87.59,63.68 A40,40 0 0 1 12.41,63.68"/>
+                </g>
+                <g fill="currentColor" stroke-width="2" stroke-linejoin="round">
+                  <path d="M91.69,47.60 L97.25,30.68 L76.57,38.20 Z"/>
+                  <path d="M8.31,52.40 L2.75,69.32 L23.43,61.80 Z"/>
+                </g>
+                <g transform="translate(54.5 50) scale(0.169) translate(-512 -512)">
+                  <path d="M382,462 H442 L530,392 V632 L442,562 H382 Z" fill="currentColor" stroke-width="20" stroke-linejoin="round"/>
+                  <path d="M568.4,472.2 A52,52 0 0 1 568.4,551.8" stroke-width="40" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="other"></span>
+          </div>
+          <ul class="mock-menu">
+            <li class="active">Reset Now</li>
+            <li class="sep"></li>
+            <li class="on">Periodic Reset</li>
+            <li class="sub">Interval</li>
+            <li class="on">Skip While Audio Is Playing</li>
+            <li class="on">Reset After Waking from Sleep</li>
+            <li class="sub">Auto-Reset Devices</li>
+            <li class="sep"></li>
+            <li class="on">Launch at Login</li>
+            <li class="sep"></li>
+            <li class="info">Output: USB Speakers</li>
+            <li class="info">Last run 14:30: Skipped (audio playing)</li>
+            <li class="sep"></li>
+            <li>Open GitHub Page…</li>
+            <li data-key="⌘Q">Quit SoundBlink</li>
+          </ul>
+        </div>
+      </div>
+
+      <section id="problem">
+        <h2>Sound familiar?</h2>
+        <ul class="symptoms">
+          <li>Your USB speakers, USB DAC or USB headset start to <strong>crackle, pop or sound distorted</strong> after a while.</li>
+          <li>They are connected through a <strong>monitor, a dock or a USB hub</strong>.</li>
+          <li>Switching the output to the built-in speakers and back <strong>makes the noise go away</strong>, until the next time.</li>
+        </ul>
+        <p class="note">Reports like this have become common since macOS Tahoe, especially on Apple silicon Macs, and there is no official fix yet. SoundBlink automates the workaround.</p>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <h3>Switch away</h3>
+            <p>The default output moves to the built-in speakers. They are muted first, so nothing leaks out.</p>
+          </li>
+          <li>
+            <h3>Wait for the stop</h3>
+            <p>As soon as your USB device has actually stopped, usually within a few hundredths of a second, SoundBlink switches back.</p>
+          </li>
+          <li>
+            <h3>Clean again</h3>
+            <p>Core Audio restarts your device, which clears the distortion.</p>
+          </li>
+        </ol>
+        <div class="blink" aria-hidden="true">
+          <span class="seg"></span><span class="gap">≈ 0.2 s</span><span class="seg"></span>
+        </div>
+        <p class="note">The whole gap is typically around 0.2 seconds. If the built-in speakers are already the output, SoundBlink does nothing. On a Mac without built-in speakers, it switches through another output device instead.</p>
+      </section>
+
+      <section id="features">
+        <h2>Features</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>One click</h3>
+            <p>Click the menu bar icon to reset. Right-click or Control-click for the menu.</p>
+          </div>
+          <div class="card">
+            <h3>Periodic reset</h3>
+            <p>Every 10, 30 or 60 minutes, or turn it off. Skipped while audio is playing.</p>
+          </div>
+          <div class="card">
+            <h3>After sleep</h3>
+            <p>Optionally resets a few seconds after your Mac wakes up.</p>
+          </div>
+          <div class="card">
+            <h3>Per-device control</h3>
+            <p>All external devices are reset automatically by default. Uncheck the ones that don't need it.</p>
+          </div>
+          <div class="card">
+            <h3>Command line</h3>
+            <p>Run <code>SoundBlink --reset</code> from Shortcuts, Raycast or Stream Deck.</p>
+          </div>
+          <div class="card">
+            <h3>Quiet and private</h3>
+            <p>No network access, no data collection, no special permissions. English and Japanese.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="install">
+        <h2>Install</h2>
+        <ol class="install">
+          <li><a href="https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip">Download SoundBlink.zip</a>, unzip it and move <strong>SoundBlink.app</strong> to the Applications folder.</li>
+          <li>
+            SoundBlink is not notarized by Apple yet, so macOS blocks the first launch. Open it once, then go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. Or run this in Terminal:
+            <pre><code>xattr -dr com.apple.quarantine /Applications/SoundBlink.app</code></pre>
+          </li>
+          <li>Right-click the menu bar icon and turn on <strong>Launch at Login</strong>.</li>
+        </ol>
+        <p class="note">Requires macOS 13 Ventura or later. Universal app for Apple silicon and Intel Macs. Every release is built from the public source code by GitHub Actions.</p>
+      </section>
+
+      <section id="faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Will a reset interrupt my music?</summary>
+          <div class="answer">
+            <p>Briefly, for about 0.2 seconds. Periodic resets are skipped while audio is playing (you can change this), so in practice they happen while your Mac is quiet.</p>
+          </div>
+        </details>
+        <details>
+          <summary>The noise keeps coming back. Can I fix it for good?</summary>
+          <div class="answer">
+            <p>SoundBlink is a workaround. The cause is in macOS or in the USB connection. Things worth trying:</p>
+            <p>Connect the audio device directly to the Mac instead of through a monitor or hub. Avoid putting two USB audio devices, such as a USB microphone and USB speakers, on the same USB 2.0 hub.</p>
+          </div>
+        </details>
+        <details>
+          <summary>A reset doesn't clear the noise.</summary>
+          <div class="answer">
+            <p>An app that is set to a specific output device, rather than the system default, may keep its own stream open. Set that app's speaker to the system default, for example in the audio settings of Zoom or Teams.</p>
+            <p>You can also make SoundBlink stay on the built-in speakers a little longer:</p>
+            <pre><code>defaults write io.github.takuhoito.soundblink blinkHold -float 0.3</code></pre>
+            <p>If that doesn't help, please <a href="https://github.com/takuhoito/SoundBlink/issues">open an issue</a> with the output of <code>SoundBlink --list</code>.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Why does macOS say it can't check the app for malicious software?</summary>
+          <div class="answer">
+            <p>Notarization requires a paid Apple Developer Program membership, which this free project doesn't have yet. The source code is public, and every release is built from it by GitHub Actions.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Does SoundBlink collect any data?</summary>
+          <div class="answer">
+            <p>No. It doesn't connect to the internet at all.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How do I uninstall it?</summary>
+          <div class="answer">
+            <p>Turn off Launch at Login, quit SoundBlink and move it to the Trash. To remove its settings too, run:</p>
+            <pre><code>defaults delete io.github.takuhoito.soundblink</code></pre>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>SoundBlink is free and open-source software under the MIT License.</p>
+      <nav>
+        <a href="https://github.com/takuhoito/SoundBlink">GitHub</a>
+        <a href="https://github.com/takuhoito/SoundBlink/releases">Releases</a>
+        <a href="https://github.com/takuhoito/SoundBlink/issues">Report an issue</a>
+        <a href="ja/" hreflang="ja" lang="ja">日本語</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>

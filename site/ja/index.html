@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoundBlink – Mac の USB スピーカーの音割れをワンクリックで直す</title>
+  <meta name="description" content="SoundBlink は、Mac で USB スピーカーや USB DAC、ヘッドセットの音がガビガビに割れる・ノイズが乗るときに、出力先を一瞬だけ内蔵スピーカーに切り替えて戻して直す、無料・オープンソースのメニューバーアプリです。">
+  <link rel="canonical" href="https://takuhoito.github.io/SoundBlink/ja/">
+  <link rel="alternate" hreflang="en" href="https://takuhoito.github.io/SoundBlink/">
+  <link rel="alternate" hreflang="ja" href="https://takuhoito.github.io/SoundBlink/ja/">
+  <link rel="alternate" hreflang="x-default" href="https://takuhoito.github.io/SoundBlink/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SoundBlink">
+  <meta property="og:title" content="SoundBlink – Mac の USB スピーカーの音割れをワンクリックで直す">
+  <meta property="og:description" content="出力先を一瞬だけ内蔵スピーカーに切り替えて戻し、USB オーディオの音割れを直す無料のメニューバーアプリ。">
+  <meta property="og:url" content="https://takuhoito.github.io/SoundBlink/ja/">
+  <meta property="og:image" content="https://takuhoito.github.io/SoundBlink/assets/og.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="SoundBlink: Mac の USB オーディオの音割れを直すアプリ">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SoundBlink",
+    "description": "出力先を一瞬だけ内蔵スピーカーに切り替えて戻し、USB オーディオの音割れを直す macOS のメニューバーアプリ。",
+    "url": "https://takuhoito.github.io/SoundBlink/ja/",
+    "downloadUrl": "https://github.com/takuhoito/SoundBlink/releases/latest",
+    "image": "https://takuhoito.github.io/SoundBlink/assets/og.png",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS 13 以降",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "inLanguage": "ja",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="./"><img src="../assets/icon.svg" alt="" width="32" height="32">SoundBlink</a>
+      <nav>
+        <a href="../" hreflang="en" lang="en">English</a>
+        <a href="https://github.com/takuhoito/SoundBlink">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <div>
+          <img class="hero-icon" src="../assets/icon.svg" alt="" width="120" height="120">
+          <h1>Mac の USB オーディオの音割れを、ワンクリックで直す</h1>
+          <p class="lead">USB スピーカーや USB DAC の音がガビガビになったときのための、無料のメニューバーアプリです。出力先を一瞬だけ内蔵スピーカーに切り替えて戻す、手作業で直すときと同じ操作を、約 0.2 秒で行います。</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip">Mac 版をダウンロード</a>
+            <a class="button secondary" href="https://github.com/takuhoito/SoundBlink/blob/main/README.ja.md">GitHub で見る</a>
+          </div>
+          <p class="meta">無料・オープンソース（MIT）· macOS 13 Ventura 以降 · Apple シリコン / Intel 対応</p>
+        </div>
+
+        <div class="mock" role="img" aria-label="メニューバーのアイコンから開いた SoundBlink のメニュー">
+          <div class="mock-bar">
+            <span class="other"></span>
+            <span class="other"></span>
+            <span class="status">
+              <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                <g stroke-width="8" stroke-linecap="round">
+                  <path d="M12.41,36.32 A40,40 0 0 1 87.59,36.32"/>
+                  <path d="M87.59,63.68 A40,40 0 0 1 12.41,63.68"/>
+                </g>
+                <g fill="currentColor" stroke-width="2" stroke-linejoin="round">
+                  <path d="M91.69,47.60 L97.25,30.68 L76.57,38.20 Z"/>
+                  <path d="M8.31,52.40 L2.75,69.32 L23.43,61.80 Z"/>
+                </g>
+                <g transform="translate(54.5 50) scale(0.169) translate(-512 -512)">
+                  <path d="M382,462 H442 L530,392 V632 L442,562 H382 Z" fill="currentColor" stroke-width="20" stroke-linejoin="round"/>
+                  <path d="M568.4,472.2 A52,52 0 0 1 568.4,551.8" stroke-width="40" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </span>
+            <span class="other"></span>
+          </div>
+          <ul class="mock-menu">
+            <li class="active">今すぐリセット</li>
+            <li class="sep"></li>
+            <li class="on">定期リセット</li>
+            <li class="sub">間隔</li>
+            <li class="on">再生中はスキップ</li>
+            <li class="on">スリープ復帰時にリセット</li>
+            <li class="sub">自動リセットの対象</li>
+            <li class="sep"></li>
+            <li class="on">ログイン時に起動</li>
+            <li class="sep"></li>
+            <li class="info">出力先: USB スピーカー</li>
+            <li class="info">最終実行 14:30: スキップ（再生中）</li>
+            <li class="sep"></li>
+            <li>GitHub ページを開く…</li>
+            <li data-key="⌘Q">SoundBlink を終了</li>
+          </ul>
+        </div>
+      </div>
+
+      <section id="problem">
+        <h2>こんな症状はありませんか？</h2>
+        <ul class="symptoms">
+          <li>USB スピーカーや USB DAC、USB ヘッドセットの音が、しばらくすると<strong>ガビガビ・バリバリと割れたり、プチプチとノイズが乗ったりする</strong></li>
+          <li><strong>モニターやドック、USB ハブ経由</strong>でつないでいる</li>
+          <li>出力先を一度内蔵スピーカーに切り替えて戻すと<strong>直る</strong>（でも、またそのうち起きる）</li>
+        </ul>
+        <p class="note">macOS Tahoe 以降、特に Apple シリコンの Mac でこうした報告が増えていますが、公式な修正はまだありません。SoundBlink は、この回避策を自動で行います。</p>
+      </section>
+
+      <section id="how-it-works">
+        <h2>仕組み</h2>
+        <ol class="steps">
+          <li>
+            <h3>切り替える</h3>
+            <p>出力先を内蔵スピーカーに切り替えます。先にミュートするので、本体から音は漏れません。</p>
+          </li>
+          <li>
+            <h3>止まるのを待つ</h3>
+            <p>USB 機器が実際に止まったら（たいてい数百分の 1 秒で止まります）、すぐに元に戻します。</p>
+          </li>
+          <li>
+            <h3>元どおり</h3>
+            <p>CoreAudio が機器を起動し直すので、音割れが消えます。</p>
+          </li>
+        </ol>
+        <div class="blink" aria-hidden="true">
+          <span class="seg"></span><span class="gap">約 0.2 秒</span><span class="seg"></span>
+        </div>
+        <p class="note">音が途切れるのは、全体でたいてい 0.2 秒ほどです。すでに内蔵スピーカーから出力しているときは何もしません。内蔵スピーカーのない Mac では、ほかの出力デバイスを経由して切り替えます。</p>
+      </section>
+
+      <section id="features">
+        <h2>機能</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>ワンクリック</h3>
+            <p>メニューバーのアイコンをクリックするとリセットします。右クリック（または Control+クリック）でメニューを開きます。</p>
+          </div>
+          <div class="card">
+            <h3>定期リセット</h3>
+            <p>10・30・60 分ごとに実行します。オフにもできます。再生中はスキップします。</p>
+          </div>
+          <div class="card">
+            <h3>スリープ復帰時</h3>
+            <p>Mac がスリープから復帰した数秒後にリセットします（オプション）。</p>
+          </div>
+          <div class="card">
+            <h3>デバイスごとに選べる</h3>
+            <p>最初は外部の出力デバイスすべてが自動リセットの対象です。不要なデバイスはチェックを外せます。</p>
+          </div>
+          <div class="card">
+            <h3>コマンドライン</h3>
+            <p>ショートカット.app や Raycast、Stream Deck から <code>SoundBlink --reset</code> で呼び出せます。</p>
+          </div>
+          <div class="card">
+            <h3>静かで安全</h3>
+            <p>ネットワークに接続せず、データも集めません。特別な権限も不要です。表示は日本語と英語に対応しています。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="install">
+        <h2>インストール</h2>
+        <ol class="install">
+          <li><a href="https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip">SoundBlink.zip をダウンロード</a>して展開し、<strong>SoundBlink.app</strong> を「アプリケーション」フォルダに移動します。</li>
+          <li>
+            まだ Apple の公証（notarization）を受けていないので、初回起動は macOS にブロックされます。一度開こうとしたあと、<strong>システム設定 → プライバシーとセキュリティ</strong> で<strong>「このまま開く」</strong>を押してください。ターミナルで次のコマンドを実行しても開けるようになります。
+            <pre><code>xattr -dr com.apple.quarantine /Applications/SoundBlink.app</code></pre>
+          </li>
+          <li>メニューバーのアイコンを右クリックし、<strong>「ログイン時に起動」</strong>をオンにします。</li>
+        </ol>
+        <p class="note">macOS 13 Ventura 以降で動きます。Apple シリコンと Intel の両方に対応したユニバーサルアプリです。リリースはすべて、公開しているソースコードから GitHub Actions でビルドしています。</p>
+      </section>
+
+      <section id="faq">
+        <h2>よくある質問</h2>
+        <details>
+          <summary>リセットすると音楽が途切れますか？</summary>
+          <div class="answer">
+            <p>0.2 秒ほど途切れます。定期リセットは再生中にはスキップするので（設定で変えられます）、実際には音を出していないときに行われます。</p>
+          </div>
+        </details>
+        <details>
+          <summary>何度も再発します。根本的に直せませんか？</summary>
+          <div class="answer">
+            <p>SoundBlink は回避策で、原因は macOS か USB の接続経路にあります。次の方法を試してみてください。</p>
+            <p>オーディオ機器を、モニターやハブ経由ではなく Mac 本体に直接つなぐ。USB マイクと USB スピーカーのように、USB オーディオ機器を 2 台同じ USB 2.0 ハブにつながない。</p>
+          </div>
+        </details>
+        <details>
+          <summary>リセットしても音割れが直りません</summary>
+          <div class="answer">
+            <p>アプリ側で出力デバイスを「システムのデフォルト」ではなく特定のデバイスに固定していると、そのアプリは自分の音声ストリームを開いたままにすることがあります。Zoom や Teams などの音声設定で、スピーカーを「システムのデフォルト」にしてください。</p>
+            <p>内蔵スピーカーにとどまる時間を長くすることもできます。</p>
+            <pre><code>defaults write io.github.takuhoito.soundblink blinkHold -float 0.3</code></pre>
+            <p>それでも直らないときは、<code>SoundBlink --list</code> の出力を添えて <a href="https://github.com/takuhoito/SoundBlink/issues">Issue</a> を立ててください。</p>
+          </div>
+        </details>
+        <details>
+          <summary>「悪質なソフトウェアかどうかを確認できません」と表示されるのはなぜですか？</summary>
+          <div class="answer">
+            <p>公証を受けるには有料の Apple Developer Program への登録が必要で、この無料のプロジェクトはまだ登録していないためです。ソースコードは公開していて、リリースはすべてそこから GitHub Actions でビルドしています。</p>
+          </div>
+        </details>
+        <details>
+          <summary>データを集めていますか？</summary>
+          <div class="answer">
+            <p>いいえ。インターネットには一切接続しません。</p>
+          </div>
+        </details>
+        <details>
+          <summary>アンインストールするには？</summary>
+          <div class="answer">
+            <p>「ログイン時に起動」をオフにしてから SoundBlink を終了し、ゴミ箱に入れてください。設定も消すときは、次のコマンドを実行します。</p>
+            <pre><code>defaults delete io.github.takuhoito.soundblink</code></pre>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>SoundBlink は MIT ライセンスの無料のオープンソースソフトウェアです。</p>
+      <nav>
+        <a href="https://github.com/takuhoito/SoundBlink">GitHub</a>
+        <a href="https://github.com/takuhoito/SoundBlink/releases">Releases</a>
+        <a href="https://github.com/takuhoito/SoundBlink/issues">不具合を報告</a>
+        <a href="../" hreflang="en" lang="en">English</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>

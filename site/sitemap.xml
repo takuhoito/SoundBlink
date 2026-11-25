@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://takuhoito.github.io/SoundBlink/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://takuhoito.github.io/SoundBlink/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://takuhoito.github.io/SoundBlink/ja/"/>
+  </url>
+  <url>
+    <loc>https://takuhoito.github.io/SoundBlink/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://takuhoito.github.io/SoundBlink/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://takuhoito.github.io/SoundBlink/ja/"/>
+  </url>
+</urlset>

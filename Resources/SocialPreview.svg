@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SoundBlink social preview image (source), used as the website's Open Graph
+     image and as the GitHub repository's social preview.
+     Render with scripts/make-icons.sh on a Mac (the text uses Helvetica Neue). -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#0B0B0C"/>
+
+  <image x="96" y="160" width="320" height="320" xlink:href="AppIcon.svg"/>
+
+  <g font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+    <text x="470" y="292" font-size="100" font-weight="700" fill="#F2F2F7"
+          letter-spacing="-2">SoundBlink</text>
+    <text x="474" y="370" font-size="40" fill="#AEAEB2">Fix crackling USB audio on your Mac</text>
+    <text x="474" y="430" font-size="30" fill="#636366">Free, open-source menu bar app for macOS</text>
+  </g>
+</svg>

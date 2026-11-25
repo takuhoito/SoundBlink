@@ -2,7 +2,7 @@
 
 # SoundBlink
 
-[日本語](README.ja.md)
+[Website](https://takuhoito.github.io/SoundBlink/) · [日本語](README.ja.md)
 
 A tiny macOS menu bar app that clears crackling USB audio by "blinking" the
 output to another device and straight back.
@@ -10,7 +10,7 @@ output to another device and straight back.
 ## The problem
 
 On some Macs, USB audio devices (speakers, DACs, headsets, often connected
-through a monitor or dock hub) start to sound crackly or distorted after a
+through a monitor or dock hub) start to crackle, pop or sound distorted after a
 while. Reports have become common since macOS Tahoe, especially on Apple
 silicon. Switching the output to the built-in speakers and back makes the noise
 go away until the next time.
@@ -38,9 +38,9 @@ device instead, preferring a physical device that it can mute.
 
 ## Install
 
-1. Download `SoundBlink-x.y.z.zip` from
-   [Releases](https://github.com/takuhoito/SoundBlink/releases), unzip it and
-   move `SoundBlink.app` to `/Applications`.
+1. Download [`SoundBlink.zip`](https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip) from the
+   [latest release](https://github.com/takuhoito/SoundBlink/releases/latest),
+   unzip it and move `SoundBlink.app` to `/Applications`.
 2. The app is not notarized yet, so Gatekeeper blocks the first launch. Open it
    once, then go to **System Settings → Privacy & Security** and click
    **Open Anyway**. Alternatively, run:
@@ -139,9 +139,14 @@ swift run SoundBlink --list        # quick CLI run without building the app bund
 The app's name, bundle ID and version are set in `scripts/config.sh`.
 
 The icons are drawn as SVG in `Resources/AppIcon.svg` and
-`Resources/StatusIcon.svg`. After editing them, run `scripts/make-icons.sh`
-to regenerate `AppIcon.icns` and `StatusIcon.pdf` (this needs `rsvg-convert`
-from `brew install librsvg`).
+`Resources/StatusIcon.svg`, and the social preview image in
+`Resources/SocialPreview.svg`. After editing them, run `scripts/make-icons.sh`
+on a Mac to regenerate `AppIcon.icns`, `StatusIcon.pdf` and the website images
+in `site/assets/` (this needs `rsvg-convert` from `brew install librsvg`).
+
+The website is plain HTML in `site/`. Open `site/index.html` in a browser to
+preview it. Changes pushed to `main` are published to GitHub Pages by
+`.github/workflows/pages.yml`.
 
 ## Contributing
 
@@ -154,5 +159,6 @@ include:
 
 ## License
 
-[MIT](LICENSE). The app icon and the menu bar icon are original artwork made
-for this project, and they are covered by the same license.
+[MIT](LICENSE). The app icon, the menu bar icon and the social preview image
+are original artwork made for this project, and they are covered by the same
+license.

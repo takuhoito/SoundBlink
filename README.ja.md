@@ -2,13 +2,13 @@
 
 # SoundBlink
 
-[English](README.md)
+[Web サイト](https://takuhoito.github.io/SoundBlink/ja/) · [English](README.md)
 
 USB オーディオの音割れ（ガビガビ音）を、出力先を一瞬だけ別のデバイスに切り替えてすぐ戻すことで解消する、macOS 用の小さなメニューバーアプリです。
 
 ## どんな問題か
 
-一部の Mac で、USB 接続のオーディオ機器（スピーカー、DAC、ヘッドセットなど）の音が、しばらく使っているうちにガビガビになることがあります。モニターやドックの USB ハブ経由でつないでいる場合によく起きます。macOS Tahoe 以降、特に Apple Silicon の Mac で報告が増えています。出力先を一度内蔵スピーカーに切り替えて戻すと直りますが、しばらくするとまた起きます。
+一部の Mac で、USB 接続のオーディオ機器（スピーカー、DAC、ヘッドセットなど）の音が、しばらく使っているうちにガビガビ・バリバリと割れたり、プチプチとノイズが乗ったりすることがあります。モニターやドックの USB ハブ経由でつないでいる場合によく起きます。macOS Tahoe 以降、特に Apple Silicon の Mac で報告が増えています。出力先を一度内蔵スピーカーに切り替えて戻すと直りますが、しばらくするとまた起きます。
 
 SoundBlink は、この「切り替えて戻す」操作を自動化します。
 
@@ -26,7 +26,7 @@ SoundBlink は、この「切り替えて戻す」操作を自動化します。
 
 ## インストール
 
-1. [Releases](https://github.com/takuhoito/SoundBlink/releases) から `SoundBlink-x.y.z.zip` をダウンロードして展開し、`SoundBlink.app` を `/Applications` に移動します。
+1. [最新のリリース](https://github.com/takuhoito/SoundBlink/releases/latest)から [`SoundBlink.zip`](https://github.com/takuhoito/SoundBlink/releases/latest/download/SoundBlink.zip) をダウンロードして展開し、`SoundBlink.app` を `/Applications` に移動します。
 2. まだ公証（notarization）を受けていないので、初回起動は Gatekeeper にブロックされます。一度開こうとしたあと、**システム設定 → プライバシーとセキュリティ** で **「このまま開く」** を押してください。ターミナルで次のコマンドを実行しても開けるようになります。
    ```sh
    xattr -dr com.apple.quarantine /Applications/SoundBlink.app
@@ -104,7 +104,9 @@ swift run SoundBlink --list        # アプリにまとめずに CLI だけ試�
 
 アプリ名、bundle ID、バージョンは `scripts/config.sh` で設定します。
 
-アイコンの元データは SVG で、`Resources/AppIcon.svg` と `Resources/StatusIcon.svg` にあります。SVG を編集したら、`scripts/make-icons.sh` を実行して `AppIcon.icns` と `StatusIcon.pdf` を作り直してください（`brew install librsvg` で入る `rsvg-convert` が必要です）。
+アイコンの元データは SVG で、`Resources/AppIcon.svg` と `Resources/StatusIcon.svg` にあります。SNS などで表示されるプレビュー画像の元データは `Resources/SocialPreview.svg` です。SVG を編集したら、Mac で `scripts/make-icons.sh` を実行して、`AppIcon.icns`、`StatusIcon.pdf`、`site/assets/` の Web サイト用の画像を作り直してください（`brew install librsvg` で入る `rsvg-convert` が必要です）。
+
+Web サイトは `site/` にある素の HTML です。`site/index.html` をブラウザで開くとプレビューできます。`main` に push すると、`.github/workflows/pages.yml` が GitHub Pages に公開します。
 
 ## コントリビュート
 
@@ -116,4 +118,4 @@ Issue や Pull Request を歓迎します。不具合を報告するときは、
 
 ## ライセンス
 
-[MIT](LICENSE)。アプリアイコンとメニューバーのアイコンは、このプロジェクトのために描いたオリジナルの作品で、同じライセンスで提供します。
+[MIT](LICENSE)。アプリアイコン、メニューバーのアイコン、プレビュー画像は、このプロジェクトのために描いたオリジナルの作品で、同じライセンスで提供します。
